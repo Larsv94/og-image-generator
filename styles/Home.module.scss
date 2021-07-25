@@ -1,0 +1,99 @@
+.container {
+  position: relative;
+  width: 1200px;
+  height: 630px;
+  padding: 4rem;
+
+  background-color: var(--primary);
+
+  &:global(.dark) {
+    --primary: #19216c;
+    --primary-text: #e0e8f9;
+    --wave-foreground: #4055a8;
+    --wave-background: #647acb;
+  }
+  &:global(.light) {
+    --primary: #e0e8f9;
+    --primary-text: #19216c;
+    --wave-foreground: #98aeeb;
+    --wave-background: #7b93db;
+  }
+}
+
+svg.waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  .frontwave {
+    fill: var(--wave-foreground);
+  }
+  .backwave {
+    fill: var(--wave-background);
+  }
+}
+
+.infoContainer {
+  display: flex;
+  width: 100%;
+}
+
+.titleContainer {
+  color: var(--primary-text);
+  & .info {
+    font-weight: normal;
+    font-size: 24px;
+  }
+
+  & .title {
+    margin-top: 0.2rem;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 96px;
+    max-width: 20ch;
+  }
+}
+.imageContainer {
+  margin-top: -12px;
+  margin-left: auto;
+  width: 217px;
+  height: 75px;
+}
+
+.personalConainer {
+  position: absolute;
+  display: flex;
+  left: 650px;
+  top: 425px;
+  .twitterImage {
+    border: 10px solid var(--wave-background);
+    border-radius: 96px;
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+    z-index: 100;
+    margin-right: 2rem;
+  }
+  .info {
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    h2 {
+      font-weight: bold;
+      font-size: 36px;
+      margin-bottom: 0px;
+      margin-top: 0rem;
+    }
+    span {
+      display: block;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 27px;
+      max-width: 35ch;
+    }
+    span + span {
+      margin-top: 8px;
+      font-style: italic;
+      font-weight: 300;
+    }
+  }
+}
