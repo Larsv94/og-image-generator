@@ -1,0 +1,11 @@
+.container{
+
+  &:global(.dark) {
+    --primary: #19216c;
+    --primary-text: #e0e8f9;
+  }
+  &:global(.light) {
+    --primary: #e0e8f9;
+    --primary-text: #19216c;
+  }
+}
