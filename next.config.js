@@ -10,6 +10,7 @@ module.exports = {
             dimensions: false,
             replaceAttrValues: {
               "#6c63ff": "var(--svg-primary)",
+              "#6C63FF": "var(--svg-primary)",
             },
           },
         },
