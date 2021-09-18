@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.scss";
+import styles from "../styles/weekenddive.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import LogoDark from "../public/Logo-light.png";
