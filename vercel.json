@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/capture/[...project].ts": {
+    "api/**/*.ts": {
       "includeFiles": "public/images/og/**"
     }
   }
