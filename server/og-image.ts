@@ -1,6 +1,7 @@
 import chrome from "chrome-aws-lambda";
 import { createHash } from "crypto";
 import fs from "fs";
+import path from "path";
 
 interface URLProps {
   project: string;
@@ -23,7 +24,7 @@ async function getOgImage(props: URLProps) {
 
   const imageUrl = `${baseUrl}/${project}?${queryString}`;
   const hash = createHash("md5").update(imageUrl).digest("hex");
-  const ogImageDir = `./public/images/og`;
+  const ogImageDir = path.join(process.cwd(), "public", "images", "og");
   const imagePath = `${ogImageDir}/${hash}.png`;
   //const publicPath = `${siteUrl}/images/og/${hash}.png`;
 
