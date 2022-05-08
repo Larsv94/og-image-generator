@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import getOgImage from "../../../server/og-image";
-import fs from "fs";
 import slugify from "slugify";
 
 type RouteQuery = NextApiRequest["query"] & {
@@ -27,8 +26,6 @@ export default async function Handle(
     ? projectQuery.join("/")
     : projectQuery;
 
-  
-
   const imageBuffer = await getOgImage({
     project,
     theme,
@@ -37,10 +34,16 @@ export default async function Handle(
     url,
     date,
   });
+  console.log("Hit it again");
   res.setHeader("Content-Type", "image/png");
   res.setHeader(
     "Content-disposition",
     `attachment; filename=${slugify(title)}.png`
   );
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=604800, stale-while-revalidate=86400"
+  );
+
   res.send(imageBuffer);
 }
