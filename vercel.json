@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/capture/*": {
+      "includeFiles": "public/images/og/**"
+    }
+  }
+}
