@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 
 interface URLProps {
-  project: string;
+  project?: string;
   theme: string;
   date: string;
   readTime: string;
@@ -29,8 +29,8 @@ async function getOgImage(props: URLProps) {
   //const publicPath = `${siteUrl}/images/og/${hash}.png`;
 
   try {
-    fs.statSync(imagePath);
-    return imagePath;
+    await fs.promises.stat(imagePath);
+    return await fs.promises.readFile(imagePath);
   } catch {
     // file does not exists, so we create it
   }
@@ -48,11 +48,11 @@ async function getOgImage(props: URLProps) {
   await browser.close();
 
   if (buffer && process.env.NODE_ENV !== "development") {
-    fs.mkdirSync(ogImageDir, { recursive: true });
-    fs.writeFileSync(imagePath, buffer);
+    await fs.promises.mkdir(ogImageDir, { recursive: true });
+    await fs.promises.writeFile(imagePath, buffer);
   }
 
-  return imagePath;
+  return buffer;
 }
 
 export default getOgImage;

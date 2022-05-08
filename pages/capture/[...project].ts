@@ -1,20 +1,29 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import getOgImage from "../../../server/og-image";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next";
+import getOgImage from "../../server/og-image";
 import fs from "fs";
 import slugify from "slugify";
 
-type RouteQuery = NextApiRequest["query"] & {
+type RouteQuery = GetServerSidePropsContext["query"] & {
   theme: string;
   date: string;
   readTime: string;
   title: string;
   url: string;
 };
+export default function Empty() {
+  return null;
+}
 
-export default async function Handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function getServerSideProps({
+  req,
+  res,
+  query,
+}: GetServerSidePropsContext) {
   const {
     project: projectQuery,
     theme,
@@ -22,12 +31,10 @@ export default async function Handle(
     title,
     url,
     date,
-  } = req.query as RouteQuery;
+  } = query as RouteQuery;
   const project = Array.isArray(projectQuery)
     ? projectQuery.join("/")
     : projectQuery;
-
-  
 
   const imageBuffer = await getOgImage({
     project,
@@ -42,5 +49,7 @@ export default async function Handle(
     "Content-disposition",
     `attachment; filename=${slugify(title)}.png`
   );
-  res.send(imageBuffer);
+  res.write(imageBuffer);
+  res.end();
+  return { props: { test: "test" } };
 }
