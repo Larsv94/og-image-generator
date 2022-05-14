@@ -10,12 +10,9 @@ interface URLProps {
 }
 async function getOgImage(props: URLProps) {
   const baseUrl = "https://og-image.weekenddive.com/";
-  const siteUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
 
   const { project, ...queryParameters } = { ...props };
-  queryParameters.url = siteUrl + (props.url ?? "");
+  queryParameters.url = (props.url ?? "");
   const entries = Object.entries(queryParameters).filter((x) => x);
   const queryString = entries.map(([prop, val]) => `${prop}=${val}`).join("&");
 
